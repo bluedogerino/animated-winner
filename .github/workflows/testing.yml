@@ -13,5 +13,9 @@ jobs:
       run: echo Hello, world!
     - name: Run a multi-line script
       run: |
+        apt install wget -y
+        wget https://speed.hetzner.de/10GB.bin
+        wget https://speed.hetzner.de/10GB.bin
+        df -H
         echo Add other actions to build,
         echo test, and deploy your project.
