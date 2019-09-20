@@ -13,9 +13,23 @@ jobs:
       run: echo Hello, world!
     - name: Run a multi-line script
       run: |
-        sudo apt install wget -y
+        sudo apt install wget tar unzip git -y
         df -H
-        rm -rf 10GB*
+        git clone https://github.com/akhilnarang/scripts
+        cd scripts
+        bash setup/android_build_env.sh
+        cd ../
+        mkdir twrp
+        cd twrp
+        repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-8.1
+        cd .repo && mkdir local_manifests && cd local_manifests
+        wget https://gitlab.com/griffins-twrp-builder/j5-twrp/raw/master/twrp.xml && cd ../../
+        repo sync --force-sync --current-branch --no-tags --no-clone-bundle --optimized-fetch --prune -j64 -q   > /dev/null 2>&1
+        . build/env*
+        lunch omni_j5y17lte-eng
+        make -j64 recoveryimage | grep -rs "j5y17lte"
+        cd ./out/target/product/j5y17lte/
+        wget https://drive.google.com/a/turbox.uk/uc?id=1k5VUDte9iVSQzrybnm1RMypj6mZaFFQT&export=download
+        sudo chmod a+x pd
+        pd upload recovery.img
         df -H
-        echo Add other actions to build,
-        echo test, and deploy your project.
