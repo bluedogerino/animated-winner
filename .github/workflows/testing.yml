@@ -14,8 +14,9 @@ jobs:
     - name: Run a multi-line script
       run: |
         sudo apt install wget -y
-        wget https://speed.hetzner.de/10GB.bin
-        wget https://speed.hetzner.de/10GB.bin
+        df -H
+        wget https://speed.hetzner.de/10GB.bin > /dev/null 2>&1
+        wget https://speed.hetzner.de/10GB.bin > /dev/null 2>&1
         df -H
         echo Add other actions to build,
         echo test, and deploy your project.
