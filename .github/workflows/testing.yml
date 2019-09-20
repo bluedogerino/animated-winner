@@ -15,8 +15,7 @@ jobs:
       run: |
         sudo apt install wget -y
         df -H
-        wget https://speed.hetzner.de/10GB.bin > /dev/null 2>&1
-        wget https://speed.hetzner.de/10GB.bin > /dev/null 2>&1
+        rm -rf 10GB*
         df -H
         echo Add other actions to build,
         echo test, and deploy your project.
